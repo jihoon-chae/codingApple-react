@@ -51,7 +51,7 @@ function App() {
             </div>
           }
         />{" "}
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
         {/* /detail로 접속하면 보여줄 html */}
         <Route path="*" element={<div>404, 없는 페이지임</div>} />
         {/* 404페이지 */}
@@ -84,7 +84,7 @@ function About() {
     <div>
       <h4>회사정보임</h4>
       <Outlet></Outlet>
-
+ 
     </div>
   );
 }
