@@ -63,7 +63,7 @@ function App() {
 
 <button onClick={()=> {
   let copy = [...글제목];
-  copy.unshift(입력값); // e.target.value 가 unshift됨
+  copy.unshift(입력값); // e.target.value 가 글제목으로 들어감
   글제목변경(copy)}}>글발행</button> 
 {/* 글제목에 하나만 더해주면 글 개수가 늘어남 */}
       {modal == true ? <Modal title={title} 글제목={글제목} /> : null}
