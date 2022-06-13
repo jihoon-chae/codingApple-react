@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 function Detail(props) {
   let [count, setCount] = useState(0);
   let [alert, setAlert] = useState(true);
-  let { id } = useParams(); // 유저가 URL파라미터 입력한거 가져오기
+  let { id } = useParams(); // 유저가 URL파라미터 입력한거 가져오기 
 
   useEffect(() => { // mount, update시 실행됨 
     let a = setTimeout(() => {
