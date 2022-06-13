@@ -6,6 +6,7 @@ import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./routes/Detail";
 import axios from "axios";
+import Cart from './routes/Cart';
 
 function App() {
   let [shoes, setShoes] = useState(data); // data.js에 있는 어레이
@@ -91,6 +92,7 @@ function App() {
           <Route path="location" element={<About />} />
           {/* about인데 location에 대한 설명, 라우트태그 안에 넣기 */}
         </Route>
+        <Route path='/cart' element={<Cart />}/>
       </Routes>
     </div>
   );
