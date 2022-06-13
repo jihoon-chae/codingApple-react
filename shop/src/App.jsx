@@ -25,7 +25,7 @@ function App() {
             </Nav.Link>
             <Nav.Link
               onClick={() => {
-                navigate("/detail");
+                navigate("/detail/0");
               }}
             >
               Cart
@@ -57,19 +57,21 @@ function App() {
                     .get("https://codingapple1.github.io/shop/data2.json")
                     .then((결과) => {
                       // console.log(결과.data);
-
+                    
                       let copy = [...shoes, ...결과.data]; // axios가 JSON을 array로 자동으로 바꿔줌
                       // console.log(copy)
-                      setShoes(copy);
+                      setShoes(copy)
                       // 로딩중 UI 숨기기
-                    });
+                    })
 
-                  axios.post("url", { name: "kim" }); // 서버로 데이터 전송
+                    axios.post('url', {name : 'kim'}) // 서버로 데이터 전송
 
-                  Promise.all([axios.get("/url1"), axios.get("/url2")]) // 동시에 ajax요청
-                    .then(() => {})
+                    Promise.all([axios.get('/url1'), axios.get('/url2')]) // 동시에 ajax요청
+                    .then(() => {
 
-                    .catch(() => {
+                    })
+
+                    .catch(() => {  
                       console.log("실패함");
                     });
                 }}
