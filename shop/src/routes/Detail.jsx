@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
+// import '../App.css'
 
 function Detail(props) {
   let [count, setCount] = useState(0);
@@ -12,10 +13,10 @@ function Detail(props) {
     // mount, update시 실행됨
     let a = setTimeout(() => {
       setAlert(false);
-    }, 2000);
-    console.log(2);
+    }, 5000);
+    // console.log(2);
     return () => {
-      console.log(1); // useEffect 동적전에 실행되는 코드
+      // console.log(1); // useEffect 동적전에 실행되는 코드
       clearTimeout(a); // 타이머 제거해주는 함수, mount시 실행 안됨
     };
   }, []);
@@ -23,7 +24,7 @@ function Detail(props) {
   return (
     <div className="container">
       {alert == true ? (
-        <div className="alert alert-warning">2초이내 구매시 할인</div>
+        <div className="alert alert-warning">5초이내 구매시 할인</div>
       ) : null}
       <button
         onClick={() => {
@@ -48,33 +49,53 @@ function Detail(props) {
       </div>
       <Nav variant="tabs" defaultActiveKey="link0">
         <Nav.Item>
-          <Nav.Link onClick={()=> {탭변경(0)}} eventKey="link0">버튼0</Nav.Link>
+          <Nav.Link
+            onClick={() => {
+              탭변경(0);
+            }}
+            eventKey="link0"
+          >
+            버튼0
+          </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link onClick={()=> {탭변경(1)}} eventKey="link1">버튼1</Nav.Link>
+          <Nav.Link
+            onClick={() => {
+              탭변경(1);
+            }}
+            eventKey="link1"
+          >
+            버튼1
+          </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link onClick={()=> {탭변경(2)}} eventKey="link2">버튼2</Nav.Link>
+          <Nav.Link
+            onClick={() => {
+              탭변경(2);
+            }}
+            eventKey="link2"
+          >
+            버튼2
+          </Nav.Link>
         </Nav.Item>
       </Nav>
-    
-      <TabContent 탭={탭} />
+
+      <TabContent shoes= {props.shoes} 탭={탭} /> 
+      {/* Detail 컴포넌트 안에서는 props.shoes로 해야함! */}
     </div>
   );
 
-  function TabContent(props){
-    if(props.탭 == 0){
-    return <div>내용0</div>}{
-        
-    }  if (props.탭 == 1){
-      return <div>내용1</div>
-    }  if (props.탭 ==2) {
-      return <div>내용2</div>
-  
-    }
+  function TabContent({탭, shoes}){
+    let [fade, setFade] = useState('')
+    useEffect(() => {
+      setFade(' end') // state가 변할때 end부착 
+    }, [탭])
+    // 탭 state가 변할때 end 부착
+    return (
+    <div className={'start' + fade}>
+    {[ <div>{shoes[0].title}</div>, <div>내용1</div>, <div>내용2</div> ][탭]}
+    </div>)
   }
-
-  
 }
 
 export default Detail;
