@@ -10,7 +10,19 @@ function Detail(props) {
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0); // 기본이 0번째 탭이니까
   let { id } = useParams(); // 유저가 URL파라미터 입력한거 가져오기
+  let 찾는상품 = props.shoes.find(x => x.id == id)
   let dispatch = useDispatch()
+
+useEffect(()=> {
+  let 꺼낸거 = localStorage.getItem('watched')
+  꺼낸거 = JSON.parse(꺼낸거)
+  꺼낸거.push(찾는상품.id)
+
+//Set으로 바꿨다가 다시 array로 만들기
+  꺼낸거 = new Set(꺼낸거)
+  꺼낸거 = Array.from(꺼낸거)
+  localStorage.setItem('watched', JSON.stringify(꺼낸거))
+},[])
 
   useEffect(() => {
     // mount, update시 실행됨

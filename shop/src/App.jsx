@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import "./App.css";
@@ -9,6 +9,11 @@ import axios from "axios";
 import Cart from './routes/Cart';
 
 function App() {
+
+  useEffect(()=>{
+    localStorage.setItem('watched', JSON.stringify( [] ))
+  },[])
+
   let [shoes, setShoes] = useState(data); // data.js에 있는 어레이
   let navigate = useNavigate(); // 페이지 이동시킬때 Link대신 씀, Hook
   return (
