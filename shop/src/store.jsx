@@ -1,21 +1,7 @@
 // 리덕스
 import { createSlice } from "@reduxjs/toolkit";
 import { configureStore } from "@reduxjs/toolkit";
-
-let user = createSlice({
-  // useState랑 비슷한 역할
-  name: "user",
-  initialState: "kim",
-
-  reducers: {
-    changeName(state) {
-      // state 수정해주는 함수
-      return "john" + state;
-    },
-  },
-});
-
-export let { changeName } = user.actions; // state 변경 함수들 남음 (오른쪽 자료를 변수로 빼는 문법)
+import user from './store/userSlice.jsx'
 
 let stock = createSlice({
   // useState랑 비슷한 역할

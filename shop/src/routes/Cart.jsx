@@ -1,20 +1,21 @@
 import { Table } from "react-bootstrap";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { changeName } from "./../store.jsx"
+import { changeName, increase } from "./../store/userSlice.jsx";
 
 function Cart() {
+  let dispatch = useDispatch(); //store.jsx로 요청 보내주는 함수
   let state = useSelector((state) => {
-   let dispatch = useDispatch() //store.jsx로 요청 보내주는 함수
     return state;
   }); // Redux store에 있던거 가져와줌
-  console.log(state.cart );
+  // console.log(state.cart );
 
   return (
     <div>
-
-{state.user}의 장바구니
-
+      <h6>{state.user.name} {state.user.age}의 장바구니</h6> 
+      <button onClick={() => {
+        dispatch(increase(100))
+      }}>age +1 버튼</button>
       <Table>
         <thead>
           <tr>
@@ -25,23 +26,24 @@ function Cart() {
           </tr>
         </thead>
         <tbody>
-{
-  state.cart.map((a, i) => {
-    return (
-      <tr key={i}>
-      <td>1</td>
-      <td>{state.cart[i].name}</td>
-      <td>{state.cart[i].count}</td>
-      <td><button onClick={() => {
-        dispatch(changeName())
-      }}>+
-        </button></td>
-    </tr>
-    )
-  })
-}
-
-         
+          {state.cart.map((a, i) => {
+            return (
+              <tr key={i}>
+                <td>1</td>
+                <td>{state.cart[i].name}</td>
+                <td>{state.cart[i].count}</td>
+                <td>
+                  <button
+                    onClick={() => {
+                      dispatch(changeName()); // dispatch안에 변경함수 써줘야함
+                    }}
+                  >
+                    +
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </div>
