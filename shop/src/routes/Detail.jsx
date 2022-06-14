@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
+import {addItem} from './../store.jsx' 
+import {useDispatch} from 'react-redux'
 // import '../App.css'
 
 function Detail(props) {
@@ -8,6 +10,7 @@ function Detail(props) {
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0); // 기본이 0번째 탭이니까
   let { id } = useParams(); // 유저가 URL파라미터 입력한거 가져오기
+  let dispatch = useDispatch()
 
   useEffect(() => {
     // mount, update시 실행됨
@@ -44,9 +47,12 @@ function Detail(props) {
           <h4 className="pt-5">{props.shoes[id].title}</h4>
           <p>{props.shoes[id].content}</p>
           <p>{props.shoes[id].price}원</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button className="btn btn-danger" onClick={() =>{
+            dispatch(addItem({id : 1, name : 'Red Knit', count : 1} ))
+            console.log(dispatch(addItem))
+          }}>주문하기</button>
         </div>
-      </div>
+      </div> 
       <Nav variant="tabs" defaultActiveKey="link0">
         <Nav.Item>
           <Nav.Link
