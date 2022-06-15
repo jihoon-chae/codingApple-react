@@ -5,11 +5,12 @@ import "./App.css";
 import data from "./data.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import axios from "axios";
-import Detail from "./routes/Detail";
-import Cart from "./routes/Cart";
+// import Detail from "./routes/Detail";
+// import Cart from "./routes/Cart";
+
 // lazy문법으로 inport해서 첫 페이지 로딩속도 향상
-const Detail = lazy(() => import("./routes/Detail.js"));
-const Cart = lazy(() => import("./routes/Cart.js"));
+const Detail = lazy(() => import("./routes/Detail.jsx"));
+const Cart = lazy(() => import("./routes/Cart.jsx"));
 
 function App() {
   useEffect(() => {
@@ -42,7 +43,7 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-
+      <Suspense> 
       <Routes>
         <Route
           path="/"
@@ -87,10 +88,8 @@ function App() {
             </div>
           }
         />{" "}
-        <Suspense> 
           {/* Suspense로 감싸면 해당 컴포넌트 접속시 로딩중 UI넣기 가능 */}
           <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
-        </Suspense>
         {/* /detail로 접속하면 보여줄 html */}
         <Route path="*" element={<div>404, 없는 페이지임</div>} />
         {/* 404페이지 */}
@@ -102,6 +101,8 @@ function App() {
         </Route>
         <Route path="/cart" element={<Cart />} />
       </Routes>
+      </Suspense>
+
     </div>
   );
 }

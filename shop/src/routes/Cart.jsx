@@ -1,10 +1,18 @@
+import { memo, useState } from "react";
 import { Table } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCount } from './../store.jsx';
 import { changeName, increase } from "./../store/userSlice.jsx";
 
+let Child = memo (function(){
+  console.log('재렌더링됨')
+  return <div>자식임</div>
+})
+
+
+
 function Cart() {
+  let[count, setCount] = useState(0)
   let dispatch = useDispatch(); //store.jsx로 요청 보내주는 함수
   let state = useSelector((state) => {
     return state;
@@ -14,7 +22,8 @@ function Cart() {
   return (
     <div>
       <h6>{state.user.name} {state.user.age}의 장바구니</h6> 
-      <button onClick={() => {
+      <Child /><button onClick={()=>{ setCount(count+1) }}> + </button>
+      <button onClick={() => { // 버튼 누르면 재렌더링 됨 -> 자식도 재렌더링됨
         dispatch(increase(100))
       }}>age +1 버튼</button>
       <Table>
